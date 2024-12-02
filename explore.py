@@ -62,6 +62,7 @@ def convert_text_numerical(data_list):
             'confidentialityImpact': C.get(cvssV3.get('confidentialityImpact')),
             'integrityImpact': I.get(cvssV3.get('integrityImpact')),
             'availabilityImpact': A.get(cvssV3.get('availabilityImpact')),
+            'baseScore': cvssV3.get('baseScore'),
             'exploitabilityScore': item.get('impact', {}).get('baseMetricV3', {}).get('exploitabilityScore'),
             'impactScore': item.get('impact', {}).get('baseMetricV3', {}).get('impactScore')
         }
@@ -78,7 +79,11 @@ def compare_vec_impact(reg_data, total_data):
     
     reg_impact = np.array([d['impactScore'] for d in reg if d['impactScore'] is not None])
     total_impact = np.array([d['impactScore'] for d in total if d['impactScore'] is not None])
+
+    reg_base = np.array([d['baseScore'] for d in reg if d['baseScore'] is not None])
+    total_base = np.array([d['baseScore'] for d in total if d['baseScore'] is not None])
     
+
     # Compare exploitability scores
     p_value_exploitability = compare_distributions(
         reg_exploitability, total_exploitability,
@@ -95,6 +100,19 @@ def compare_vec_impact(reg_data, total_data):
         title='Impact Score Distribution'
     )
     
+    p_value_base = compare_distributions(
+        reg_base, total_base,
+        label_a='Reg Base', label_b='Total Base',
+        title='Base Score Distribution'
+    )
+
+    plt.boxplot([reg_base, total_base], tick_labels=['BaseScore Regression', 'BaseScore Total'])
+    plt.show()
+    plt.boxplot([reg_impact, total_impact], tick_labels=['ImpactScore Regression', 'ImpactScore Total'])
+    plt.show()
+    plt.boxplot([reg_exploitability, total_exploitability], tick_labels=['ExploitabilityScore Regression', 'ExploitabilityScore Total'])
+    plt.show()
+    
     #mi_impact = compare_mutual_information(reg_impact, total_impact)
 
     # Plot histograms
@@ -109,7 +127,7 @@ def compare_vec_impact(reg_data, total_data):
         plt.legend()
         plt.show()
 
-    return (p_value_exploitability, p_value_impact)# , (mi_exploitability, mi_impact)
+    return (p_value_exploitability, p_value_impact, p_value_base)# , (mi_exploitability, mi_impact)
 
 def extract_statistics(reg_path, full_path):
     # Read JSON files
@@ -122,12 +140,13 @@ def extract_statistics(reg_path, full_path):
 
     print(f"Percentage of regression cases: {len(reg_data)/len(total_data)*100}%")
 
-    (cd_exploitability, cd_impact)  = compare_vec_impact(reg_data, total_data)
+    (cd_exploitability, cd_impact, cd_base)  = compare_vec_impact(reg_data, total_data)
 
     print(f"p-value of exploitability scores comparison: {cd_exploitability}")
     #print(f"Mutual information of exploitability scores: {mi_exploitability}")
     print(f"p-value of impact scores comparison: {cd_impact}")
     #print(f"Mutual information of impact scores: {mi_impact}")
+    print(f"p-value of base scores comparison: {cd_base}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
