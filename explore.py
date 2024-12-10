@@ -43,7 +43,7 @@ def compare_distributions(a, b, label_a='Reg', label_b='Total', title='Distribut
     plt.xlabel('Value')
     plt.ylabel('Density')
     plt.legend()
-    plt.savefig(f"{title.replace(' ', '_')}.png")
+    plt.savefig(f"out/img/{title.replace(' ', '_')}.png")
     plt.close()
     
     if outfile is not None:
@@ -106,7 +106,7 @@ def time_analysis(reg_data, total_data):
     plt.ylabel("Count of CVEs")
     plt.legend()
     plt.grid(True)
-    plt.savefig("Time_Analysis.png")
+    plt.savefig("out/img/Time_Analysis.png")
     plt.close()
 
 def compare_vec_impact(reg_data, total_data, outfile):
@@ -155,17 +155,17 @@ def compare_vec_impact(reg_data, total_data, outfile):
     # Boxplots for visual inspection
     plt.boxplot([reg_base, total_base], labels=['BaseScore Regression', 'BaseScore Total'])
     plt.title("Base Score Boxplot Comparison")
-    plt.savefig("BaseScore_Boxplot.png")
+    plt.savefig("out/img/BaseScore_Boxplot.png")
     plt.close()
     
     plt.boxplot([reg_impact, total_impact], labels=['ImpactScore Regression', 'ImpactScore Total'])
     plt.title("Impact Score Boxplot Comparison")
-    plt.savefig("ImpactScore_Boxplot.png")
+    plt.savefig("out/img/ImpactScore_Boxplot.png")
     plt.close()
     
     plt.boxplot([reg_exploitability, total_exploitability], labels=['ExploitabilityScore Regression', 'ExploitabilityScore Total'])
     plt.title("Exploitability Score Boxplot Comparison")
-    plt.savefig("ExploitabilityScore_Boxplot.png")
+    plt.savefig("out/img/ExploitabilityScore_Boxplot.png")
     plt.close()
     
     # Histograms for categorical metrics
@@ -179,7 +179,7 @@ def compare_vec_impact(reg_data, total_data, outfile):
             plt.hist(total_metric, bins=20, alpha=0.5, label='Total')
             plt.title(metric)
             plt.legend()
-            plt.savefig(f"{metric}_Histogram.png")
+            plt.savefig(f"out/img/{metric}_Histogram.png")
             plt.close()
 
     return (ks_p_exploitability, ks_p_impact, ks_p_base, t_p_exploitability, t_p_impact, t_p_base, reg, total)
@@ -193,7 +193,7 @@ def extract_statistics(reg_path, full_path):
 
     total_data = total_data["CVE_Items"]
 
-    with open("results.txt", "w") as outfile:
+    with open("out/results.txt", "w") as outfile:
         percentage = (len(reg_data)/len(total_data))*100
         outfile.write(f"Percentage of regression cases: {percentage}%\n\n")
 

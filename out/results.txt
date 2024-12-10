@@ -1,0 +1,73 @@
+Percentage of regression cases: 0.06528897467923243%
+
+=== Regression Exploitability Score Statistics ===
+Count: 74
+Mean: 2.712162162162162
+Variance: 1.048635865595325
+25th Percentile: 1.8
+Median (50th): 2.8
+75th Percentile: 3.9
+
+=== Total Exploitability Score Statistics ===
+Count: 148901
+Mean: 2.7098320360507984
+Variance: 0.8955333134043532
+25th Percentile: 1.8
+Median (50th): 2.8
+75th Percentile: 3.9
+
+=== Regression Impact Score Statistics ===
+Count: 74
+Mean: 4.17972972972973
+Variance: 2.3045891161431706
+25th Percentile: 3.6
+Median (50th): 3.6
+75th Percentile: 5.9
+
+=== Total Impact Score Statistics ===
+Count: 148901
+Mean: 4.343667940443651
+Variance: 2.3204386962992007
+25th Percentile: 3.6
+Median (50th): 3.6
+75th Percentile: 5.9
+
+=== Regression Base Score Statistics ===
+Count: 74
+Mean: 6.99054054054054
+Variance: 3.1168024105186274
+25th Percentile: 5.5
+Median (50th): 6.85
+75th Percentile: 8.174999999999999
+
+=== Total Base Score Statistics ===
+Count: 148901
+Mean: 7.195498351253518
+Variance: 2.8335376696250885
+25th Percentile: 5.9
+Median (50th): 7.5
+75th Percentile: 8.8
+
+=== Exploitability_Score_Distribution Comparison ===
+Kolmogorov-Smirnov Test: statistic=0.10344992509988044, p-value=0.3807556397785241
+T-test (Welch): statistic=0.019437374671800532, p-value=0.984545180816472
+
+=== Impact_Score_Distribution Comparison ===
+Kolmogorov-Smirnov Test: statistic=0.08829410871035837, p-value=0.5802978840816961
+T-test (Welch): statistic=-0.9224390987128248, p-value=0.3593353633580699
+
+=== Base_Score_Distribution Comparison ===
+Kolmogorov-Smirnov Test: statistic=0.09291671575000765, p-value=0.5153376933281699
+T-test (Welch): statistic=-0.991686739042127, p-value=0.32462323213342226
+
+Performing time analysis...
+Time analysis plot saved as Time_Analysis.png
+
+=== Summary of p-values ===
+KS p-value (Exploitability): 0.3807556397785241
+KS p-value (Impact): 0.5802978840816961
+KS p-value (Base): 0.5153376933281699
+
+T-test p-value (Exploitability): 0.984545180816472
+T-test p-value (Impact): 0.3593353633580699
+T-test p-value (Base): 0.32462323213342226
